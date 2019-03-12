@@ -11,8 +11,28 @@ public class Main {
     }
 
     static String addStringNumbers(String arg1, String arg2) {
-        // TODO: implementation
-        return null;
+        int difference = arg1.length() - arg2.length();
+        if (difference > 0) { // arg1 is longer
+            for (int i = arg2.length(); i < arg1.length(); i++) {
+                arg2 = "0" + arg2;
+            }
+        } else if (difference < 0) { // arg2 is longer
+            for (int i = arg1.length(); i < arg2.length(); i++) {
+                arg1 = "0" + arg1;
+            }
+        }
+        String str_sum = "";
+        int overload = 0;
+        for (int i = arg1.length() - 1; i >= 0; i--) {
+            int intermediate = Integer.parseInt(arg1.substring(i, i + 1)) + Integer.parseInt(arg2.substring(i, i + 1)) + overload;
+            if (intermediate >= 10)
+                overload = intermediate / 10;
+            else
+                overload = 0;
+            intermediate %= 10;
+            str_sum = intermediate + str_sum;
+        }
+        return str_sum;
     }
 
     @Test
