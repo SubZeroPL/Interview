@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -9,32 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Main {
 
     static String addStringNumbers(String arg1, String arg2) {
-        int difference = arg1.length() - arg2.length();
-        if (difference > 0) // arg1 is longer
-            arg2 = padStringWithZeroes(arg1, arg2);
-        else if (difference < 0) // arg2 is longer
-            arg1 = padStringWithZeroes(arg2, arg1);
-        StringBuilder str_sum = new StringBuilder();
-        int overload = 0;
-        for (int i = arg1.length() - 1; i >= 0; i--) {
-            int intermediate = Integer.parseInt(arg1.substring(i, i + 1)) + Integer.parseInt(arg2.substring(i, i + 1)) + overload;
-            if (intermediate >= 10)
-                overload = intermediate / 10;
-            else
-                overload = 0;
-            intermediate %= 10;
-            str_sum.insert(0, intermediate);
-        }
-        return str_sum.toString();
-    }
-
-    private static String padStringWithZeroes(String arg1, String arg2) {
-        StringBuilder arg2Builder = new StringBuilder(arg2);
-        for (int i = arg2Builder.length(); i < arg1.length(); i++) {
-            arg2Builder.insert(0, "0");
-        }
-        arg2 = arg2Builder.toString();
-        return arg2;
+        BigInteger a1 = new BigInteger(arg1);
+        BigInteger a2 = new BigInteger(arg2);
+        BigInteger sum = a1.add(a2);
+        return sum.toString();
     }
 
     @Test
